@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour {
 	}
 
 	public void SpawnEnemy(){
-		Instantiate (Enemy, transform.position, transform.rotation);
+		GameObject SpawnedEnemy = Instantiate (Enemy, transform.position, transform.rotation);
+		SpawnedEnemy.GetComponent<Chase> ().spawner = this.GetComponent<Spawner>();
 	}
 }
