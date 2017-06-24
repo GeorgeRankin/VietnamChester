@@ -30,6 +30,14 @@ public class FOV_Detection : MonoBehaviour {
 		}
 	}
 
+	public bool IsInFOV(Vector3 position){
+
+		Vector3 screenPoint = Camera.main.WorldToViewportPoint (position);
+		if (screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1) {
+			return true;
+		} else
+			return false;
+	}
 
 	// Update is called once per frame
 	void Update () {
