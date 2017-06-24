@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0f639b8296248f2459d973383ca43acd
-timeCreated: 1498334131
+guid: 402962559803ea54796e6e112f5810f7
+timeCreated: 1498328440
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Window
+    4300000: Nokia3310
     9500000: //RootNode
   materials:
     importMaterials: 1

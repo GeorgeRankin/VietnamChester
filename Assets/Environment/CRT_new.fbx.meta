@@ -1,15 +1,33 @@
 fileFormatVersion: 2
-guid: 0f639b8296248f2459d973383ca43acd
-timeCreated: 1498334131
+guid: 20598206ca4d4ff49942367c407d1eca
+timeCreated: 1498328439
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: pCylinder2
+    100004: polySurface1
+    100006: polySurface2
+    100008: polySurface3
+    100010: polySurface3 1
+    100012: transform89
+    100014: transform90
+    100016: transform91
+    100018: transform92
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Window
+    400002: pCylinder2
+    400004: polySurface1
+    400006: polySurface2
+    400008: polySurface3
+    400010: polySurface3 1
+    400012: transform89
+    400014: transform90
+    400016: transform91
+    400018: transform92
+    2300000: polySurface3
+    3300000: polySurface3
+    4300000: polySurface3
     9500000: //RootNode
   materials:
     importMaterials: 1
