@@ -15,13 +15,11 @@ public class Spawner : MonoBehaviour {
 
 	void Update(){
 		
-			// Enemy is dead?							  //
+			// Enemy is dead?									  // Not looking at the enemy?								 // Not looking at spawner?
 		if (SpawnedEnemy.GetComponent<Chase> ().killed == true && SpawnedEnemy.GetComponent<Chase>().FOV_Overlap == false && spawnFOV_Overlap == false) {
+		
 			Destroy (SpawnedEnemy);
-
-			//if (spawnFOV_Overlap == true) {
-				SpawnEnemy ();
-			//}
+			SpawnEnemy ();
 		}
 	}
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Chase : MonoBehaviour {
 
 	public Spawner spawner;
-	public float speed;
+	private float speed;
 
 	private GameObject player;
 	private Vector3 direction;
@@ -17,6 +17,7 @@ public class Chase : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find ("Camera (eye)");
+		speed = Random.Range (3, 5);
 	}
 
 	void OnTriggerEnter (Collider col){
