@@ -44,7 +44,7 @@ public class Chase_2 : MonoBehaviour {
 			direction = player.transform.position - this.transform.position;
 			//direction.y = 0;
 			this.transform.rotation = Quaternion.Slerp (this.transform.rotation, Quaternion.LookRotation (direction), 0.1f);
-			this.transform.position = Vector3.MoveTowards (transform.position, player.transform.position, Time.deltaTime / 0.5f);
+			this.transform.position = Vector3.MoveTowards (transform.position, player.transform.position, Time.deltaTime / 2f);
 		}
 
 		else
