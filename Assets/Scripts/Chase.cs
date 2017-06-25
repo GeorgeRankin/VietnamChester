@@ -9,14 +9,18 @@ public class Chase : MonoBehaviour {
 
 	private GameObject player;
 	private Vector3 direction;
+	private float spawnDistance;
 	public bool FOV_Overlap;
 	private bool Flashlight_Overlap;
 	public bool killed;
 	public int Burn;
 	public float counter;
+	public AudioSource Sounds;
+	public Material Eye;
 
 	// Use this for initialization
 	void Start () {
+		
 		Debug.Log (counter);
 		GetComponent<AudioSource> ().Play();
 		player = GameObject.Find ("Camera (eye)");
@@ -28,11 +32,17 @@ public class Chase : MonoBehaviour {
 		else{
 			speed = Random.Range (1, 2);
 		}
+
+		spawnDistance = Vector3.Distance (this.transform.position, Camera.main.transform.position);
+		//GetComponent<AudioHighPassFilter> ().cutoffFrequency = 150;
 	}
 
 	void OnTriggerEnter (Collider col){
-		if (col.tag == "FOV")
+		
+		if (col.tag == "FOV") {
 			FOV_Overlap = true;
+			Sounds.Pause();
+		}
 		
 		if (col.tag == "Flashlight")
 			Flashlight_Overlap = true;
@@ -43,6 +53,7 @@ public class Chase : MonoBehaviour {
 		if (col.tag == "FOV"){
 			FOV_Overlap = false;
 			Burn = 0;
+			Sounds.Play();
 		}
 		
 		if (col.tag == "Flashlight"){
@@ -51,16 +62,23 @@ public class Chase : MonoBehaviour {
 		}
 	}
 
+	void OnDestroy(){
+
+		GetComponent<AudioSource> ().Play ();
+	}
+
 	// Update is called once per frame
 	void Update () {
-		
+
+		float distance = Vector3.Distance(this.transform.position, Camera.main.transform.position);
 		if (!killed) {
 			if (FOV_Overlap && Flashlight_Overlap) {
-				this.gameObject.GetComponent<Renderer> ().material.color = Color.red;
+				Eye.color = Color.green;
 				Burn++;
 
 				if (Burn == 50) {
 					killed = true;
+					Eye.color = Color.white;
 					GetComponent<Rigidbody> ().isKinematic = false;
 				}
 
@@ -71,7 +89,11 @@ public class Chase : MonoBehaviour {
 				this.transform.position = Vector3.MoveTowards (transform.position, player.transform.position, Time.deltaTime / speed);
 
 			} else
-				this.gameObject.GetComponent<Renderer> ().material.color = Color.white;
+				Eye.color = Color.red;
 		}
+
+		// Audio filter
+		GetComponent<AudioHighPassFilter> ().cutoffFrequency =
+			((distance / spawnDistance) * 130) + 20;
 	}
 }

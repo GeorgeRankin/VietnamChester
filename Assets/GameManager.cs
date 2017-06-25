@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject SpawnerPrefab;
 	public Transform[] SpawnPositions;
 	public TextMesh Score;
+	public AudioSource ClickSound;
+	public bool GameOver;
 	private bool spawnersActivated;
 	private bool notSame;
 	private float Timer;
@@ -19,12 +21,14 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (spawnersActivated) {
-			Timer += Time.deltaTime;
-			Score.GetComponent<MeshRenderer> ().enabled = true;
-			Score.text = Timer.ToString("#.");
-			if (Timer >= 15) {
-				Spawn ();
+		if (!GameOver) {
+			if (spawnersActivated) {
+				Timer += Time.deltaTime;
+				Score.GetComponent<MeshRenderer> ().enabled = true;
+				Score.text = Timer.ToString ("#.");
+				if (Timer >= 15) {
+					Spawn ();
+				}
 			}
 		}
 		/*
@@ -54,6 +58,7 @@ public class GameManager : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		if (col.tag == "Prop") {
+			ClickSound.Play ();
 			Debug.Log ("starting");
 			if (!spawnersActivated) {
 				i = Random.Range(0,6);

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class HitResponse : MonoBehaviour {
 
+	GameObject[] Enemies;
 	int health = 3;
 
 	void OnTriggerEnter(Collider col){
@@ -14,7 +15,12 @@ public class HitResponse : MonoBehaviour {
 			//do something
 			health --;
 			if (health <= 0) {
-				SceneManager.LoadScene("021_Controller_GrabbingObjectsWithJoints");
+				Enemies = GameObject.FindGameObjectsWithTag ("Enemy");
+				for (int i = 0; i < Enemies.Length; i++) {
+					Destroy (Enemies [i].gameObject);
+					GameObject.Find ("GameManager").GetComponent<GameManager> ().GameOver = true;
+				}
+				//SceneManager.LoadScene("021_Controller_GrabbingObjectsWithJoints");
 			}
 		}
 	}
