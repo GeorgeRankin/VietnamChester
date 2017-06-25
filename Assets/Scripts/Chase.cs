@@ -13,15 +13,24 @@ public class Chase : MonoBehaviour {
 	private bool Flashlight_Overlap;
 	public bool killed;
 	public int Burn;
+	public float counter;
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log (counter);
+		GetComponent<AudioSource> ().Play();
 		player = GameObject.Find ("Camera (eye)");
-		speed = Random.Range (3, 5);
+		if (counter <=30f)
+		speed = Random.Range (4, 6);
+		else if (counter <= 60f){
+			speed = Random.Range (2, 3);
+		}
+		else{
+			speed = Random.Range (1, 2);
+		}
 	}
 
 	void OnTriggerEnter (Collider col){
-		
 		if (col.tag == "FOV")
 			FOV_Overlap = true;
 		
@@ -32,9 +41,6 @@ public class Chase : MonoBehaviour {
 	void OnTriggerExit(Collider col){
 		
 		if (col.tag == "FOV"){
-			//if (killed) {
-			//	Destroy (this.gameObject);
-			//}
 			FOV_Overlap = false;
 			Burn = 0;
 		}
@@ -57,13 +63,10 @@ public class Chase : MonoBehaviour {
 					killed = true;
 					GetComponent<Rigidbody> ().isKinematic = false;
 				}
-				//spawner.SpawnEnemy ();
-				//Destroy(gameObject);
 
 			} else if (FOV_Overlap == false) {
 				
 				direction = player.transform.position - this.transform.position;
-				//direction.y = 0;
 				this.transform.rotation = Quaternion.Slerp (this.transform.rotation, Quaternion.LookRotation (direction), 3.0f);
 				this.transform.position = Vector3.MoveTowards (transform.position, player.transform.position, Time.deltaTime / speed);
 
